@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 #
 # This utility will dump out a utf-8 table of characters next to its decimal 
@@ -26,17 +26,15 @@ def printasc(start, end):
     for i in range(start, end+1):
         try:
             if i in range(0x80, 0xa0):
-                c = ' '
+                c = chr(' ')
             else:
-                c = unichr(i)
-            print "%03d" % i + ':' + "0x%02x" % i + ':' + c.encode('utf-8'),
+                c = chr(i)
+            print("%03d" % i + ':' + "0x%02x" % i + ':' + c, end=' ')
         except:
-            print
-            print "Can't print character ", i
-            return ''
+            print("%03d" % i + ':' + "0x%02x" % i + ':' + ' ', end=' ')
         n += 1
         if (n % 8) == 0:
-            print
+            print()
 
 start_supplied = False
 
@@ -66,5 +64,7 @@ except IndexError:
 
 endnum   = strtonum(endrange)
 
+sys.stdout = open(sys.stdout.fileno(), mode='w', encoding='utf8')
 printasc(startnum, endnum)
+print()
 
