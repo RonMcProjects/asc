@@ -28,7 +28,7 @@ def printasc(start, end):
     n = 0
     for i in range(start, end+1):
         try:
-            if i in range(0x80, 0xa0):
+            if i in range(0x80, 0x9f):
                 c = chr(' ')
             else:
                 c = chr(i)
