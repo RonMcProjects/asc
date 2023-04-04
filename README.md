@@ -30,5 +30,5 @@ Display a UNICODE character:
 
 You can mix-and-match decimal and hexadecimal:
 ```bash
-asc 4096 0x1006
+./asc.py 9728 0x262f
 ```
