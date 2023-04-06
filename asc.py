@@ -38,16 +38,22 @@ def printasc(start, end):
         n += 1
         if (n % 8) == 0:
             print()
+    return n
 
 start_supplied = False
 
-# Function to convert a string to a numeric.
+# Function to convert a string to a numeral.
 # Accepts hexadecimal number if prefixed by 0x, decimal otherwise.
 def strtonum(strnum):
     try:
         strnum = int(strnum)
     except ValueError:
-        strnum = int(strnum, 16)
+        try:
+            strnum = int(strnum, 16)
+        except ValueError:
+            print("Invalid numeral '" + strnum + "'", end='. ')
+            print("Use decimal or hexadecimal numbers.")
+            exit()
 
     return strnum
 
@@ -59,7 +65,7 @@ try:
 except IndexError:
     startrange = '32'
 
-# Convert the starting character to a numeric.
+# Convert the starting character to a numeral.
 startnum = strtonum(startrange)
 
 # Did the user provide a 2nd argument?
@@ -74,9 +80,12 @@ except IndexError:
     else:
         endrange = '255'
 
-# Convert the ending character to a numeric.
+# Convert the ending character to a numeral.
 endnum   = strtonum(endrange)
 
 #sys.stdout = open(sys.stdout.fileno(), mode='w', encoding='utf8')
 # Print the range of characters.
-printasc(startnum, endnum)
+numchars = printasc(startnum, endnum)
+if (numchars % 8) != 0:
+    # add a <CR> terminator where needed
+    print() 
