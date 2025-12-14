@@ -8,7 +8,7 @@ Valid arguments are decimal and hexadecimal ASCII and UNICODE values.
 
 ## Examples:
 
-Display characters from 32 to 255 (default):
+Display characters from 0 to 255 (default):
 ```bash
 ./asc.py
 ```

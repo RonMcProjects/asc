@@ -21,6 +21,12 @@
 
 import sys
 
+ctrl_codes = [ # Control characters 0-31
+'NUL', 'SOH', 'STX', 'ETX', 'EOT', 'ENQ', 'ACK', 'BEL',
+'BS ', 'TAB', 'LF ', 'VT ', 'FF ', 'CR ', 'S0 ', 'S1 ',
+'DLE', 'DC1', 'DC2', 'DC3', 'DC4', 'NAK', 'SYN', 'ETB',
+'CAN', 'EM ', 'SUB', 'ESC', 'FS ', 'GS ', 'RS ', 'US ' ]
+
 # Function to print a range of characters along with their decimal and 
 # hexadecimal values.  Wraps around every 8.  Unprintable characters
 # are replaced with spaces.
@@ -29,7 +35,9 @@ def printasc(start, end):
     for i in range(start, end+1):
         try:
             if i in range(0x80, 0xa0):
-                c = chr(' ')
+                c = ' '
+            elif i in range(0, 32):
+                c = ctrl_codes[i]
             else:
                 c = chr(i)
             print("%03d" % i + ':' + "0x%02x" % i + ':' + c, end=' ')
@@ -63,7 +71,7 @@ try:
     startrange = sys.argv[1]
     start_supplied = True
 except IndexError:
-    startrange = '32'
+    startrange = '0'
 
 # Convert the starting character to a numeral.
 startnum = strtonum(startrange)
