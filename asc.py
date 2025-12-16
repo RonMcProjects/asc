@@ -38,6 +38,8 @@ def printasc(start, end):
                 c = ' '
             elif i in range(0, 32):
                 c = ctrl_codes[i]
+            elif i == 127:
+                c = 'DEL'
             else:
                 c = chr(i)
             print("%03d" % i + ':' + "0x%02x" % i + ':' + c, end=' ')
